@@ -1,0 +1,341 @@
+/**
+头部垂直居中的问题
+nav 24%
+4，display:flex;flex:1;后设置图片width:100%;
+
+注意点：
+1,viewport
+2,设置宽度100%
+3，button a至少48px
+4，display:flex;flex:1;后设置图片width:100%;
+**/
+
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Roboto;
+}
+
+body {
+  font-size: 12px;
+  color: #424242;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+/*header, nav, footer, section, article, div {
+  box-sizing: border-box;
+}
+*/
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a{text-decoration: none;color: #000;}
+
+
+
+/**
+垂直居中：vertical-align:middle;该元素需为inline-block或者inline
+**/
+
+.header{
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+	/*min-height: 56px;*/
+}
+.header_Inner
+{
+	width: 100%;
+	vertical-align: middle;
+
+}
+.header_Inner img{
+	display: inline-block;/*也可不加*/
+	vertical-align: middle;
+	height: 72px;
+	float: left;
+}
+h1{
+	display: inline-block;
+	vertical-align: middle;
+	margin:20px;
+	color: #212121;
+	font-size: 4em;
+	font-weight: 300;
+	float: left;
+	overflow: hidden;
+	}
+
+/*****
+****small layout
+****/
+.header_Inner a
+{
+	float: right;
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 20px;
+	/*position: absolute;
+	top: 50%;
+	transform:translateY(-50%);*/
+}
+
+.small_nav
+{
+	width: 150px;
+	transform:translate(-300px,0);
+	height: 100%;
+	position: absolute;
+	transition:transform 0.3s ease;
+}
+
+.small_nav li
+{
+	display: block;
+	padding: 1.5em;
+	text-align: center;
+}
+
+
+
+.small_nav.open
+{
+	transform:translate(0,0);
+}
+
+
+.nav
+{
+	display: none;
+}
+
+/**
+*********************big_news
+**/
+.big_news
+{
+	height: 300px;
+	width: 100%;
+	background-size: cover;
+	position: relative;
+	background-image: url("images/dog.jpg");
+}
+.news_summary
+{
+	height: 30%;
+	bottom: 0;
+	position: absolute;
+	width: 100%;                 /* 一定要设置，因为绝对定位宽度是内容宽度*/
+	padding: 10px;
+	background-color: rgba(0,0,0,0.7);
+	color: #fff;
+}
+
+/**
+*********************top_news
+**/
+
+.top_news
+{
+	padding: 10px;
+	height: 300px;
+	border-bottom: 1px solid  #e0e0e0;
+}
+
+.top_news .title,.latest_news .title
+{
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 300;
+	border-bottom:1px solid #e0e0e0;
+}
+.top_news .more,.latest_news .more
+{
+	float: right;
+}
+
+.news_item::before
+{
+	content: ">>"
+}
+.news_item
+{
+	line-height: 20px;
+	padding: 1em 0;
+	border-bottom:1px solid #e0e0e0;
+}
+.news_item a:hover,.item_content a:hover
+{
+	text-decoration: underline;
+}
+
+
+
+/**
+*********************table
+**/
+
+.scores
+{
+	padding-top: 10px;
+	width: 100%;
+	height: 300px;
+}
+.scores_table
+{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+.scores_table th
+{
+	background: #78909c;
+	color: white;
+	padding: 1em;
+}
+.scores_table td
+{
+	padding: 1em;
+}
+.scores_table td:nth-child(3)
+{
+	text-align: right;
+}
+.scores_table td:nth-child(4)
+{
+	text-align: left;
+}
+.scores_table tr:nth-child(even)
+{
+	background-color: #eceff1;
+}
+.bolder
+{
+	font-weight: bold;
+}
+
+/**
+************weather
+*/
+.weather
+{
+	width: 100%;
+	padding: 1em;
+}
+.weather h3{font-size: 1.5em;font-weight: 300;}
+.weather p{font-size: 1.2em;font-weight: bold;}
+.weather .today
+{
+	display: block;
+	font-weight: 300;
+}
+.today img{vertical-align: middle;}
+.today .today_degree{font-size: 3em;color: #424242;}
+.today .degree{font-size: 1.5em;color: #424242;}
+.weekly_weather{
+	display: flex;
+	text-align: center;
+}
+.weekday
+{
+	flex:1;/*一定要加，否则就是初始值0，就不会伸展*/
+}
+.weekday span,.weekday img
+{
+	display: block;
+}
+.weekday img
+{
+	width: 100%;
+}
+
+
+/**
+**latest news
+**/
+.latest_news{padding: 1em;}
+.latest_news h2{margin-bottom: 12px;}
+/********method1 flex
+.latest_news_item
+{
+	width: 100%;
+	display: flex;
+	margin-bottom: 20px;
+}
+.latest_news_item img
+{
+	width:10%;
+	height: 10%;
+	margin-right: 20px;
+}
+.latest_news_item .item_content
+{
+	flex:1;
+}
+*/
+.latest_news_item::after
+{
+	content:"";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.latest_news_item{
+	/*zoom:1;*/
+	margin-bottom: 30px;
+}
+.latest_news_item img
+{
+	float: left;
+	width: 15%;
+	height: 15%;
+	margin-right: 20px;
+	display: block;
+}
+.latest_news_item .item_content
+{
+	overflow: hidden;
+}
+
+.item_content a
+{
+	color: #666;
+	font-weight: bold;
+}
+
+
+/**
+**footer
+**/
+
+footer
+{
+	padding: 1em;
+	border-top: 1px solid #e0e0e0;
+}
+
+footer a
+{
+	color: #333;
+	margin: 0 2.5em;
+}
+
+
+body
+{
+	display: flex;
+	flex-direction:column;
+}
+
