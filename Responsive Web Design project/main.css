@@ -1,0 +1,455 @@
+/**
+头部垂直居中的问题
+nav 24%
+4，display:flex;flex:1;后设置图片width:100%;它们始终在一行
+header中有img,h和nav icon，icon是绝对定位的，怎么保证宽度小的时候有绝对定位的元素，怎么保证
+
+注意点：
+1,viewport
+2,设置宽度100%
+3，button a至少48px
+4，display:flex;flex:1;后设置图片width:100%;
+5，一定要加z-index，因为经过测试，flex元素的z-index是auto,绝对定位的默认是0,hui
+被覆盖在下面看不见。
+**/
+
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Roboto;
+}
+
+body {
+  font-size: 12px;
+  color: #424242;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+/**
+很重要,否则可能因为里面的padding等元素使得40%，60%加上padding会超过100%，会到下一行去
+*/
+header, nav, footer, main, .content>div {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a{text-decoration: none;color: #000;}
+
+
+
+/**
+垂直居中：vertical-align:middle;该元素需为inline-block或者inline
+**/
+
+.header{
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+	min-width: 408px;
+	/*min-height: 56px;*/
+}
+.header_Inner
+{
+
+	width: 100%;
+	display: flex;
+	align-items:center;
+
+}
+.header_Inner img{
+	display: inline-block;/*也可不加*/
+	height: 72px;
+}
+h1{
+	display: inline-block;
+	margin:20px 0 20px 10px;
+	color: #212121;
+	font-size: 2em;
+	font-weight: 300;
+	flex:1;
+	/*white-space: nowrap;*/
+	}
+
+/*****
+****small layout
+****/
+.header_Inner a
+{
+	display: inline-block;
+	cursor: pointer;
+	padding: 30px;
+	/*position: absolute;
+	top: 50%;
+	transform:translateY(-50%);*/
+}
+
+.small_nav
+{
+	width: 150px;
+	background-color: #7086c0;
+	color: white;
+	-webkit-transform: translate(-300px, 0);
+	transform:translate(-300px,0);
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom:0;
+	transition:transform 0.3s ease;
+	z-index: 9999;
+	/**
+	一定要加z-index，因为经过测试，flex元素的z-index是auto,绝对定位的默认是0,hui
+	被覆盖在下面看不见。
+	*/padding-top:40px;
+
+}
+
+.small_nav li
+{
+	display: block;
+	padding: 1.5em;
+	text-align: center;
+
+}
+.small_nav a
+{
+	color: white;
+}
+
+
+
+
+.open
+{
+	-webkit-transform:translate(0,0);
+	transform:translate(0,0);
+}
+
+
+.nav
+{
+	display: none;
+}
+.nav ul{
+	width: 100%;
+}
+.nav li
+{
+	width: 24%;
+	display: inline-block;
+	padding: 1.5em;
+	box-sizing:border-box;
+	text-align: center;
+}
+
+
+/**
+*********************big_news
+**/
+.big_news
+{
+	height: 300px;
+	width: 100%;
+	background-size: cover;
+	position: relative;
+	background-image: url("images/dog.jpg");
+}
+.news_summary
+{
+	height: 30%;
+	bottom: 0;
+	position: absolute;
+	width: 100%;                 /* 一定要设置，因为绝对定位宽度是内容宽度*/
+	padding: 10px;
+	background-color: rgba(0,0,0,0.7);
+	color: #fff;
+	box-sizing:border-box;      /*也要设置，否则会超出，或者父overflowhidden也行*/
+}
+
+/**
+*********************top_news
+**/
+
+.top_news
+{
+	width: 100%;
+	padding: 10px;
+	height: 300px;
+	border-bottom: 1px solid  #e0e0e0;
+	/*margin-top: 20px;*/
+}
+
+.top_news .title,.latest_news .title
+{
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 300;
+	border-bottom:1px solid #e0e0e0;
+}
+.top_news .more,.latest_news .more
+{
+	float: right;
+}
+
+.news_item::before
+{
+	content: ">>"
+}
+.news_item
+{
+	line-height: 20px;
+	padding: 1em 0;
+	border-bottom:1px solid #e0e0e0;
+}
+.news_item a:hover,.item_content a:hover
+{
+	text-decoration: underline;
+}
+
+
+
+/**
+*********************table
+**/
+
+.scores
+{
+	padding-top: 10px;
+	width: 100%;
+	height: 300px;
+}
+.scores_table
+{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+.scores_table th
+{
+	background: #78909c;
+	color: white;
+	padding: 1em;
+}
+.scores_table td
+{
+	padding: 1em;
+}
+.scores_table td:nth-child(3)
+{
+	text-align: right;
+}
+.scores_table td:nth-child(4)
+{
+	text-align: left;
+}
+.scores_table tr:nth-child(even)
+{
+	background-color: #eceff1;
+}
+.bolder
+{
+	font-weight: bold;
+}
+
+/**
+************weather
+*/
+.weather
+{
+	width: 100%;
+	padding: 1em;
+}
+.weather h3{font-size: 1.5em;font-weight: 300;}
+.weather p{font-size: 1.2em;font-weight: bold;}
+.weather .today
+{
+	display: block;
+	font-weight: 300;
+}
+.today img{vertical-align: middle;}
+.today .today_degree{font-size: 3em;color: #424242;}
+.today .degree{font-size: 1.5em;color: #424242;}
+.weekly_weather{
+	display: flex;
+	text-align: center;
+}
+.weekday
+{
+	flex:1;/*一定要加，否则就是初始值0，就不会伸展*/
+}
+.weekday span,.weekday img
+{
+	display: block;
+}
+.weekday img
+{
+	width: 100%;
+}
+
+
+/**
+**latest news
+**/
+.latest_news{padding: 1em;}
+.latest_news h2{margin-bottom: 12px;}
+
+/*****
+***method1 自适应布局:flex
+****
+.latest_news_item
+{
+	width: 100%;
+	display: flex;
+	margin-bottom: 20px;
+}
+.latest_news_item img
+{
+	width:10%;
+	height: 10%;
+	margin-right: 20px;
+}
+.latest_news_item .item_content
+{
+	flex:1;
+}
+*/
+
+
+/********
+******method2 自适应布局，左浮动，右overflow
+*******/
+.latest_news_item::after
+{
+	content:"";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.latest_news_item{
+	/*zoom:1;*/
+	margin-bottom: 30px;
+}
+.latest_news_item img
+{
+	float: left;
+	width: 30%;
+	min-width: 120px;
+	min-height: 88px;
+	height: 30%;
+	margin-right: 20px;
+	display: block;
+}
+.latest_news_item .item_content
+{
+	overflow: hidden;
+}
+
+.item_content a
+{
+	color: #666;
+	font-weight: bold;
+}
+
+
+/**
+**footer
+**/
+
+footer
+{
+	padding: 1em;
+	border-top: 1px solid #e0e0e0;
+}
+
+footer a
+{
+	color: #333;
+	margin: 0 2.5em;
+}
+
+
+body
+{
+	display: flex;
+	flex-direction:column;
+}
+
+
+@media screen and (min-width:600px)
+{
+	.header a{
+		display: none;
+	}
+	.small_nav
+	{
+		transform:translate(-300px,0);
+	}
+	.nav
+	{
+		display: block;
+	}
+	main .content{display: flex;flex-wrap:wrap;}/*flex-wrap很重要，默认值是no-wrap，会在一行显示*/
+	.big_news
+	{
+		order:-2;
+		width:60%;
+	}
+	.weather
+	{
+		order:-2;
+		width: 40%;
+	}
+}
+
+@media screen and (min-width:768px)
+{
+	header h1{
+		font-size: 3em;
+		transition:font-size 0.5s ease;
+	}
+
+	main{box-shadow: 2px 0 3px rgba(0, 0, 0, 0.26)}
+	main .content{display: flex;flex-wrap:wrap;}/*flex-wrap很重要，默认值是no-wrap，会在一行显示*/
+	.big_news,.top_news
+	{
+		order:-2;
+		width:50%;
+	}
+	.scores,.weather
+	{
+		order:-1;
+		margin-top: 20px;
+	}
+	.weather
+	{
+		width: 40%;
+	}
+	.scores{width: 60%;}
+}
+@media screen and (min-width:1000px)
+{
+	header h1{
+		font-size: 4em;
+		transition:font-size 1s ease;
+	}
+	main{
+		margin:auto;
+		width: 1000px;
+		box-shadow: 2px 0 5px rgba(0, 0, 0, 0.26)
+	}
+
+}
+
+
+
+
